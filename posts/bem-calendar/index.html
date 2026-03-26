@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Simple BEM calendar | Alexander Tarmolov</title>
+<meta name="keywords" content="">
+<meta name="description" content="First of all, a little preface. A couple of weeks ago I got to know about Frontend Developer School run by HeadHunter. The entering assignment was to make a simple calendar. This issue seemed to be quite interesting for me and I decided to solve it using new bem-core library.
+This article is divided into five parts:
+Design tells you how I designed my mini application. Tools teaches you which tools make are handy and make your development cozy.">
+<meta name="author" content="Alexander Tarmolov">
+<link rel="canonical" href="https://tarmolov.ru/posts/bem-calendar/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://tarmolov.ru/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tarmolov.ru/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tarmolov.ru/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tarmolov.ru/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tarmolov.ru/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://tarmolov.ru/posts/bem-calendar/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Simple BEM calendar" />
+<meta property="og:description" content="First of all, a little preface. A couple of weeks ago I got to know about Frontend Developer School run by HeadHunter. The entering assignment was to make a simple calendar. This issue seemed to be quite interesting for me and I decided to solve it using new bem-core library.
+This article is divided into five parts:
+Design tells you how I designed my mini application. Tools teaches you which tools make are handy and make your development cozy." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tarmolov.ru/posts/bem-calendar/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2013-09-22T19:31:12+00:00" />
+<meta property="article:modified_time" content="2013-09-22T19:31:12+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Simple BEM calendar"/>
+<meta name="twitter:description" content="First of all, a little preface. A couple of weeks ago I got to know about Frontend Developer School run by HeadHunter. The entering assignment was to make a simple calendar. This issue seemed to be quite interesting for me and I decided to solve it using new bem-core library.
+This article is divided into five parts:
+Design tells you how I designed my mini application. Tools teaches you which tools make are handy and make your development cozy."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tarmolov.ru/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Simple BEM calendar",
+      "item": "https://tarmolov.ru/posts/bem-calendar/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Simple BEM calendar",
+  "name": "Simple BEM calendar",
+  "description": "First of all, a little preface. A couple of weeks ago I got to know about Frontend Developer School run by HeadHunter. The entering assignment was to make a simple calendar. This issue seemed to be quite interesting for me and I decided to solve it using new bem-core library.\nThis article is divided into five parts:\nDesign tells you how I designed my mini application. Tools teaches you which tools make are handy and make your development cozy.",
+  "keywords": [
+    
+  ],
+  "articleBody": "First of all, a little preface. A couple of weeks ago I got to know about Frontend Developer School run by HeadHunter. The entering assignment was to make a simple calendar. This issue seemed to be quite interesting for me and I decided to solve it using new bem-core library.\nThis article is divided into five parts:\nDesign tells you how I designed my mini application. Tools teaches you which tools make are handy and make your development cozy. Development is dedicated to established solutions and problems. Testing shows you how I tested my project and made it stable. Continuous integration is the last one and it tells you about automatization. Note. It is a long article. If you do not want to read the whole post please go to project page on github for short version :)\nNote. If you are not familiar with BEM methodology and want to learn more, bem.info is the best choice.\nLet us start with Design part.\nDesign BEM methodology teaches you that a first step of building web site is to mark out page blocks. In my case it is an easy peasy issue because of the simplicity of this page.\nI have only four major blocks:\nToolbar with a couple of buttons. Search block with input and icon. Calendar navigation. And calendar itself. I marked blocks on the screenshot below:\nThe next step is much more interesting. How to connect these blocks and make the application work?\nIt seems that I need a small but robust architecture for the calendar.\nI liked the approach presented by Nicholas C. Zakas and called Scalable JavaScript Application Architecture. The major idea is to divide responsibility and business logic among several layers of an application. Each layer has knowledge only about adjacent layers.\nIn my case this paradigm does not work completely because of bem-core. I will explain the reason later but now a couple of words about the library.\nIn the official page we can read the following definition:\nbem-core is a base library for web interface development. It provides the minimal stack for coding client-side JavaScript and templating.\nbem-core uses special module system that is not officially named yet; so I call it just YMaps Module System (YMS). It solves problems such as asynchronous require and provide which are absent in AMD and CommonJS. It is a compact and robust module system; therefore, I strongly recommend you to try it in your new project.\nbem-core provides a lot of useful modules (and the module system itself) but I have included this library in the project because of i-bem. It is a helper for creating BEM blocks in declarative way.\nSo why cannot I implement this paradigm completely? The case is bem-core uses jQuery which penetrated into all parts of i-bem. As a result you have to use jQuery in your BEM blocks because blocks know about base library.\nMy architecture overview is presented in a diagram below: As you can see that BEM is not displayed on the diagram. In my opinion base architecture should not depend on BEM or other methodology.\nThere are a few differences from Zakas approach:\nEvery layer is aware of the base library: everything needs jQuery :) Component manager is responsible for starting and stopping components. Modules are named components because I already have modules from YMS (conflict names). For storing an application data I use a simple active model which can be accessed through the sandbox, too. However, components do not know where the model comes from. That is important.\nI have only four visual components:\nCalendar Navigation Search Toolbar And one (Sync) is non-visual for synching my application with localStorage.\nEach component represents itself using BEM block with the same name (not necessary requirement). Once a component has been started, it creates BEM block as a View-Controller and puts it into DOM node taken from the Sandbox.\nIn the calendar the components work as controllers an communicate only through the model i.e. indirectly. Also I want to emphasize that the components are very simple mediators. The majority of code is concentrated in BEM blocks.\nMore details you can see on the class diagram:\nApplication start sequence is obvious and straightforward:\nIt looks quite simple and works the same way ;)\nI wanted to achieve a stable core of my application; therefore, I had defined interfaces for major classes:\nISandbox IComponent IBEMView They are the boundary elements of my application. Sandbox connects application and components. Components connect with BEM blocks which implement IBemView interface.\nUsing interfaces is always increasing stability of your application.\nTools When you use BEM your code is divided into great number of blocks. Then files will be concatenated and minified. Of course we can do it manually but usually we use special tools for this issue.\nAt first, it was a make-platform. Then bem-tools were created. And then enb came.\nenb is a powerful and fast builder. In development mode you even do not notice that your files have been built. It works just amazingly!\nAlso enb has a perfect documentation (at this moment only Russian version available), a range of technologies, and easy way to create new ones. New versions with fixed bugs and improvements are published frequently. I strongly recommend you to use this builder for your BEM projects.\nMoreover, enb makes it possible to get rid of dependencies for javascript modules because it can read them from YMS declarations. As a result I have added only 7 files with dependencies!\nbem-core recommends you to use BEMHTML template engine by default. However, I recommend to use bh template engine. It is small, easy to use, and much faster than BEMHTML. You just write CommonJS modules:\nmodule.exports = function (bh) { bh.match('button', function (ctx) { ctx.tag('button'); }); }; Next two tools are about validation javascript code: jshint-groups and jscs.\nThe first of them is a jshint wrapper. It provides possibility to add different rules for checking files with jshint. There are tests, templates, client, and server javascript in your project. Now you can write separate and suitable jshint rules for all of them. It is a flexible way to lint your code.\njscs is a javascript codestyle checker. It will make sure that your code is written in one consistent codestyle! It provides a lots of predefined rules. If you do not find suitable rules you can add new ones.\nThe last one is csscomb. This tool formats your CSS code. I love when CSS rules are formatted in the same order and are divided into groups. In my opinion such nice-looking code is easy to read and maintain.\nSo what we have: enb, jshint-groups, jscs, and csscomb. This is a bunch of great tools and I advise you to use them in your everyday development.\nDevelopment BEM claims that you should create absolutely independent blocks. In CSS blocks should be aware only about their elements and they do not have any knowledge about possible nested blocks. In order to change the style of nested blocks use mixins.\nFor example, see bemjson for search block\n{ block: 'search', content: [ { block: 'icon', mix: [ { block: 'search', elem: 'icon' } ], mods: {type: 'loupe'} }, { block: 'input', mix: [ { block: 'search', elem: 'input' } ] } ] } I mixed the elements of search blocks with nested icons and input blocks. For instance, it makes it possible to write CSS for position of icon block.\n.search__icon { position: absolute; top: 50%; left: -20px; margin-top: -6px; } If I decide to change icon block to megaicon block, I will not need to change styles in the search block. Cool, hah?\nThe possible drawback is conflict styles of nested block and mixin. But I accept this shortcoming. It is kind of fee for such magic as mixins.\nIn javascript i-bem provides methods like findBlockInside/findBlockOn for finding nested blocks. It also provides methods findBlockOutside/findBlocksOutside which conflicts with the idea of independent blocks. I do not recommend to use this method in your project. Just disable them.\nAll javascript modules are wrapped using YMS. For example,\nmodules.define('i-bem__dom', function (provide, DOM) { DOM.decl('label', { setText: function (text) { this.domElem.text(text); }, getText: function () { return this.domElem.text(); } }); provide(DOM); }); However, declaration for navigation looks in a different way\nmodules.define('search', [/** deps **/], function () { provide(DOM.decl('search', { // ... })); }); Please pay attention to module naming. In the first case it is i-bem__dom but actually it is declared as label. In the second case I declared the module with appropriate name. Why did I declare modules in two different ways?\nDefinition depends on how you use the module in your application.\nSearch module has been created manually in the search component; so, the code would be executed during the application initialization. On the other hand label is used latently in form_type_event. This block should be initialized by executing DOM.init. After that i-bem inits only blocks declared in special way, i.e. as i-bem__dom module.\nBe careful declaring your modules.\nTesting When you work in a big company like Yandex your application is always intently checked by testing team.\nI am proud to say that we have an unbelievable testing team! Guys are really incredible! They can find bugs which can be reproduced in a very tricky way (sometimes I really hate them, lol). After careful check your application can be published in production without any doubts.\nHowever, this project is not a part of my job and I do not have great testers to verify my application. Therefore I undertook three steps to create a stable application.\nFirst step is a linting code with jshint and jscs. I have already told you about them in Tools part. After this step I got consistent code.\nUnit testing is the next step. In my opinion tests are an important part of your code. Using phantomjs to run tests in console or automatically after each commit, can speed up development and refactoring.\nHonestly, I usually write tests only after I have completed structure (backbone) of an application. I do not use TDD approach. Anyway without unit tests I have no guarantee that my application works properly :)\nI think it does not matter what kind of framework you choose for unit testing. For instance, I used mocha + chai + sinon for BEM calendar. Unit testing cannot completely save the day, though. They do not test the application in different browsers.\nI have a macbook and can test my calendar only in couple browsers and on one platform. First idea was to download virtual machines from modern.ie. But I do not have much time to test the calendar in all virtual machines.\nSo my choice is BrowserStack with a wide range of browsers and platforms. Firstly, this service runs your site in various browsers (25 in free version) and creates screnshot for each of them. If you noticed an error on a screenshot you can run virtual machine in browser to explore its reason in detail.\nI hate doing extra actions for testing. So I created a special page calendar-test where my testing script adds event and opens popups. Now I can quickly verify work of my application.\nLinting code, unit testing, and browserStack help you to make an application very stable. Use them wise.\nContinuous integration (CI) CI is a good way to be calm about your project. At work I usually use TeamCity by JetBrains which is perfectly suitable for our work issues. Teamcity helps to automate everything in our development process and does it well. Unfortunately our teamcity server is not opened for everyone. Moreover Teamcity is not free and you should own a server for setting it up.\nTo be honest I did not want to buy server for this project; so, I chose Travis which is perfectly suitable for projects hosted on github.\nMany developers have heard about CI because it is in a fashion but they never used it. Why? Is it so complex to set up? Or could only serious guys use it? It is a myth. Try Travis. Probably it is the easiest CI tool to set up.\nYou have to do only three steps:\nSign in Travis CI and activate GitHub service Hook for your project. Add .travis.yaml file to your repository. git push Travis CI config is rather simple. You need to specify only language and nodejs version.\nlanguage: node_js node_js: - 0.8 This configuration is sufficient for linting your code and running unit tests! Do not forget to add scripts section in your package.json.\nBut I wanted more. My goal was to regenerate my demo after each successful build when all tests have been passed. I googled a blog post with a solution.\nIn a nutshell, you should teach Travis to authenticate to your repository with push permission.\nCreate a github access token. Encrypt your token and put it into a travis config so no one can use your token and break into your repo. gem install travis travis encrypt -r / GH_TOKEN= --add env.global After that action travis can not only clone your project repository but also push some changes to it. So I wrote a script update-gh-pages.sh and appended a new directive to travis config:\nafter_success: ./update-gh-pages.sh Now travis regenerates my demo for each push. It works like a magic.\nConclusion BEM calendar is a very simple application but this article is not about creating calendars. My goal is to show you principles of good development:\nDevelop the design of your application carefully and lay the groundwork for future possible features. Use tools which help you write more accurate and stable code. Test your code not only with unit tests but use crossbrowser tests, too. Automate everything you can. I hope this article provide will be useful for you further projects.\nAnd thanks to all those courageous who read this article down to the end :)\nThanks I want to say a special thank to my girlfriend for invaluable support and making this post much better.\nAlso I thank everyone who helped me to improve the post. Special thanks to ignovak, dfilatov, and dodev.\n",
+  "wordCount" : "2360",
+  "inLanguage": "en",
+  "datePublished": "2013-09-22T19:31:12Z",
+  "dateModified": "2013-09-22T19:31:12Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alexander Tarmolov"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tarmolov.ru/posts/bem-calendar/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Alexander Tarmolov",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tarmolov.ru/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tarmolov.ru/" accesskey="h" title="Alexander Tarmolov (Alt + H)">Alexander Tarmolov</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://tarmolov.ru/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tarmolov.ru/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Simple BEM calendar
+    </h1>
+    <div class="post-meta"><span title='2013-09-22 19:31:12 +0000 +0000'>September 22, 2013</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;Alexander Tarmolov
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#design" aria-label="Design">Design</a></li>
+                <li>
+                    <a href="#tools" aria-label="Tools">Tools</a></li>
+                <li>
+                    <a href="#development" aria-label="Development">Development</a></li>
+                <li>
+                    <a href="#testing" aria-label="Testing">Testing</a></li>
+                <li>
+                    <a href="#continuous-integration-ci" aria-label="Continuous integration (CI)">Continuous integration (CI)</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a></li>
+                <li>
+                    <a href="#thanks" aria-label="Thanks">Thanks</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>First of all, a little preface. A couple of weeks ago I got to know about Frontend Developer School run by <a href="http://hh.ru/locale.do?language=EN">HeadHunter</a>. The entering assignment was to make a simple calendar. This issue seemed to be quite interesting for me and I decided to solve it using new <a href="https://github.com/bem/bem-core/">bem-core</a> library.</p>
+<p>This article is divided into five parts:</p>
+<ul>
+<li><strong>Design</strong> tells you how I designed my mini application.</li>
+<li><strong>Tools</strong> teaches you which tools make are handy and make your development cozy.</li>
+<li><strong>Development</strong> is dedicated to established solutions and problems.</li>
+<li><strong>Testing</strong> shows you how I tested my project and made it stable.</li>
+<li><strong>Continuous integration</strong> is the last one and it tells you about automatization.</li>
+</ul>
+<p><strong>Note.</strong> It is a long article. If you do not want to read the whole post please go to project page on <a href="https://github.com/tarmolov/bem-calendar#bem-calendar-">github</a> for short version :)</p>
+<p><strong>Note.</strong> If you are not familiar with BEM methodology and want to learn more, <a href="http://bem.info/">bem.info</a> is the best choice.</p>
+<p>Let us start with Design part.</p>
+<h3 id="design">Design<a hidden class="anchor" aria-hidden="true" href="#design">#</a></h3>
+<p><a href="http://bem.info/">BEM methodology</a> teaches you that a first step of building web site is to mark out page blocks. In my case it is an easy peasy issue because of the simplicity of this page.</p>
+<p><a href="https://raw.github.com/tarmolov/bem-calendar/master/doc/image/_blocks/image_blocks_all.png"><img loading="lazy" src="https://raw.github.com/tarmolov/bem-calendar/master/doc/image/_blocks/image_blocks_all.png" alt="Calendar blocks"  />
+</a></p>
+<p>I have only four major blocks:</p>
+<ul>
+<li>Toolbar with a couple of buttons.</li>
+<li>Search block with input and icon.</li>
+<li>Calendar navigation.</li>
+<li>And calendar itself.</li>
+</ul>
+<p>I marked blocks on the screenshot below:</p>
+<p><a href="https://raw.github.com/tarmolov/bem-calendar/master/doc/image/_blocks/image_blocks_main.png"><img loading="lazy" src="https://raw.github.com/tarmolov/bem-calendar/master/doc/image/_blocks/image_blocks_main.png" alt="Calendar blocks"  />
+</a></p>
+<p>The next step is much more interesting. How to connect these blocks and make the application work?</p>
+<p>It seems that I need a small but robust architecture for the calendar.</p>
+<p>I liked the approach presented by Nicholas C. Zakas and called <a href="http://www.youtube.com/watch?v=7BGvy-S-Iag">Scalable JavaScript Application Architecture</a>. The major idea is to divide responsibility and business logic among several layers of an application. Each layer has knowledge only about adjacent layers.</p>
+<p><a href="https://raw.github.com/tarmolov/bem-calendar/master/doc/image/_design/image_design_zakas.png"><img loading="lazy" src="https://raw.github.com/tarmolov/bem-calendar/master/doc/image/_design/image_design_zakas.png" alt="Level of abstractions"  />
+</a></p>
+<p>In my case this paradigm does not work completely because of bem-core. I will explain the reason later but now a couple of words about the library.</p>
+<p>In <a href="https://github.com/bem/bem-core/">the official page</a> we can read the following definition:</p>
+<blockquote>
+<p>bem-core is a base library for web interface development. It provides the minimal stack for coding client-side JavaScript and templating.</p>
+</blockquote>
+<p><code>bem-core</code> uses <a href="https://github.com/ymaps/modules">special module system</a> that is not officially named yet; so I call it just YMaps Module System (YMS). It solves problems such as asynchronous <code>require</code> and <code>provide</code> which are absent in AMD and CommonJS. It is a compact and robust module system; therefore, I strongly recommend you to try it in your new project.</p>
+<p><code>bem-core</code> provides a lot of useful modules (and the module system itself) but I have included this library in the project because of <a href="http://bem.info/articles/bem-js-main-terms/">i-bem</a>. It is a helper for creating BEM blocks in declarative way.</p>
+<p>So why cannot I implement this paradigm completely? The case is bem-core uses jQuery which penetrated into all parts of <code>i-bem</code>. As a result you have to use jQuery in your BEM blocks because blocks know about base library.</p>
+<p>My architecture overview is presented in a diagram below:
+<a href="https://raw.github.com/tarmolov/bem-calendar/master/doc/image/_design/image_design_tarmolov.png"><img loading="lazy" src="https://raw.github.com/tarmolov/bem-calendar/master/doc/image/_design/image_design_tarmolov.png" alt="Architecture overview"  />
+</a></p>
+<p>As you can see that BEM is not displayed on the diagram. In my opinion base architecture should not depend on BEM or other methodology.</p>
+<p>There are a few differences from Zakas approach:</p>
+<ul>
+<li>Every layer is aware of the base library: everything needs jQuery :)</li>
+<li>Component manager is responsible for starting and stopping components.</li>
+<li>Modules are named components because I already have modules from <code>YMS</code> (conflict names).</li>
+</ul>
+<p>For storing an application data I use a simple active model which can be accessed through the sandbox, too. However, components do not know where the model comes from. That is important.</p>
+<p>I have only four visual components:</p>
+<ul>
+<li><code>Calendar</code></li>
+<li><code>Navigation</code></li>
+<li><code>Search</code></li>
+<li><code>Toolbar</code></li>
+</ul>
+<p>And one (<code>Sync</code>) is non-visual for synching my application with localStorage.</p>
+<p>Each component represents itself using BEM block with the same name (not necessary requirement). Once a component has been started, it creates BEM block as a View-Controller and puts it into DOM node taken from the Sandbox.</p>
+<p>In the calendar the components work as controllers an communicate only through the model i.e. indirectly. Also I want to emphasize that the components are very simple <a href="http://en.wikipedia.org/wiki/Mediator_pattern">mediators</a>. The majority of code is concentrated in BEM blocks.</p>
+<p>More details you can see on the class diagram:</p>
+<p><a href="https://raw.github.com/tarmolov/bem-calendar/master/doc/uml/_class/uml_class_main.png"><img loading="lazy" src="https://raw.github.com/tarmolov/bem-calendar/master/doc/uml/_class/uml_class_main.png" alt="Class diagram"  />
+</a></p>
+<p>Application start sequence is obvious and straightforward:</p>
+<p><a href="https://raw.github.com/tarmolov/bem-calendar/master/doc/uml/_sequence/uml_sequence_application-start.png"><img loading="lazy" src="https://raw.github.com/tarmolov/bem-calendar/master/doc/uml/_sequence/uml_sequence_application-start.png" alt="Application start"  />
+</a></p>
+<p>It looks quite simple and works the same way ;)</p>
+<p>I wanted to achieve a stable core of my application; therefore, I had defined interfaces for major classes:</p>
+<ul>
+<li><a href="https://github.com/tarmolov/bem-calendar/blob/master/blocks/interface/i-sandbox.js">ISandbox</a></li>
+<li><a href="https://github.com/tarmolov/bem-calendar/blob/master/blocks/interface/i-component.js">IComponent</a></li>
+<li><a href="https://github.com/tarmolov/bem-calendar/blob/master/blocks/interface/i-bemview.js">IBEMView</a></li>
+</ul>
+<p>They are the boundary elements of my application. Sandbox connects application and components. Components connect with BEM blocks which implement <code>IBemView</code> interface.</p>
+<p>Using interfaces is always increasing stability of your application.</p>
+<h3 id="tools">Tools<a hidden class="anchor" aria-hidden="true" href="#tools">#</a></h3>
+<p>When you use BEM your code is divided into great number of blocks. Then files will be concatenated and minified. Of course we can do it manually but usually we use special tools for this issue.</p>
+<p>At first, it was a make-platform. Then <a href="https://github.com/bem/bem-tools">bem-tools</a> were created. And then <code>enb</code> came.</p>
+<p><a href="http://enb-make.info/">enb</a> is a powerful and fast builder. In development mode you even do not notice that your files have been built. It works just amazingly!</p>
+<p>Also <code>enb</code> has a perfect documentation (at this moment only Russian version available), a range of technologies, and easy way to create new ones. New versions with fixed bugs and improvements are published frequently. I strongly recommend you to use this builder for your BEM projects.</p>
+<p>Moreover, <code>enb</code> makes it possible to get rid of dependencies for javascript modules because it can read them from <code>YMS</code> declarations. As a result I have added only 7 files with dependencies!</p>
+<p><code>bem-core</code> recommends you to use <a href="http://bem.info/articles/bemhtml-intro/">BEMHTML</a> template engine by default. However, I recommend to use <a href="github.com/enb-make/bh">bh</a> template engine. It is small, easy to use, and much faster than <code>BEMHTML</code>. You just write CommonJS modules:</p>
+<pre tabindex="0"><code>module.exports = function (bh) {
+    bh.match(&#39;button&#39;, function (ctx) {
+        ctx.tag(&#39;button&#39;);
+    });
+};
+</code></pre><p>Next two tools are about validation javascript code: <a href="https://github.com/ikokostya/jshint-groups">jshint-groups</a> and <a href="https://github.com/mdevils/node-jscs">jscs</a>.</p>
+<p>The first of them is a <a href="http://jshint.com/">jshint</a> wrapper. It provides possibility to add different rules for checking files with <code>jshint</code>. There are tests, templates, client, and server javascript in your project. Now you can write separate and suitable <code>jshint</code> rules for all of them. It is a flexible way to lint your code.</p>
+<p><code>jscs</code> is a javascript codestyle checker. It will make sure that your code is written in one consistent codestyle! It provides a lots of predefined rules. If you do not find suitable rules you  <a href="https://github.com/mdevils/node-jscs/blob/master/CONTRIBUTION.md">can add new ones</a>.</p>
+<p>The last one is <a href="https://github.com/csscomb/csscomb.js">csscomb</a>. This tool formats your CSS code. I love when CSS rules are formatted in the same order and are divided into groups. In my opinion such nice-looking code is easy to read and maintain.</p>
+<p>So what we have: <code>enb</code>, <code>jshint-groups</code>, <code>jscs</code>, and <code>csscomb</code>. This is a bunch of great tools and I advise you to use them in your everyday development.</p>
+<h3 id="development">Development<a hidden class="anchor" aria-hidden="true" href="#development">#</a></h3>
+<p>BEM claims that you should create absolutely independent blocks. In CSS blocks should be aware only about their elements and they do not have any knowledge about possible nested blocks. In order to change the style of nested blocks use mixins.</p>
+<p>For example, see bemjson for search block</p>
+<pre tabindex="0"><code>{
+    block: &#39;search&#39;,
+    content: [
+        {
+            block: &#39;icon&#39;,
+            mix: [
+                {
+                    block: &#39;search&#39;,
+                    elem: &#39;icon&#39;
+                }
+            ],
+            mods: {type: &#39;loupe&#39;}
+        },
+        {
+            block: &#39;input&#39;,
+            mix: [
+                {
+                    block: &#39;search&#39;,
+                    elem: &#39;input&#39;
+                }
+            ]
+        }
+    ]
+}
+</code></pre><p>I mixed the elements of search blocks with nested icons and input blocks. For instance, it makes it possible to write CSS for position of icon block.</p>
+<pre tabindex="0"><code>.search__icon
+{
+    position: absolute;
+    top: 50%;
+    left: -20px;
+
+    margin-top: -6px;
+}
+</code></pre><p>If I decide to change icon block to megaicon block, I will not need to change styles in the search block. Cool, hah?</p>
+<p>The possible drawback is conflict styles of nested block and mixin. But I accept this shortcoming. It is kind of fee for such magic as mixins.</p>
+<p>In javascript <code>i-bem</code> provides methods like <code>findBlockInside</code>/<code>findBlockOn</code> for finding nested blocks. It also provides methods <code>findBlockOutside</code>/<code>findBlocksOutside</code> which conflicts with the idea of independent blocks. I do not recommend to use this method in your project. Just <a href="https://github.com/tarmolov/bem-aib">disable them</a>.</p>
+<p>All javascript modules are wrapped using <code>YMS</code>. For example,</p>
+<pre tabindex="0"><code>modules.define(&#39;i-bem__dom&#39;, function (provide, DOM) {
+
+    DOM.decl(&#39;label&#39;, {
+
+        setText: function (text) {
+            this.domElem.text(text);
+        },
+
+        getText: function () {
+            return this.domElem.text();
+        }
+
+    });
+
+    provide(DOM);
+
+});
+</code></pre><p>However, declaration for navigation looks in a different way</p>
+<pre tabindex="0"><code>modules.define(&#39;search&#39;, [/** deps **/], function () {
+
+    provide(DOM.decl(&#39;search&#39;, {
+        // ...
+    }));
+
+});
+</code></pre><p>Please pay attention to module naming. In the first case it is <code>i-bem__dom</code> but actually it is declared as <code>label</code>. In the second case I declared the module with appropriate name. Why did I declare modules in two different ways?</p>
+<p>Definition depends on how you use the module in your application.</p>
+<p>Search module has been created manually in the search component; so, the code would be executed during the application initialization. On the other hand label is used latently in <code>form_type_event</code>. This block should be initialized by executing <code>DOM.init</code>. After that <code>i-bem</code> inits only blocks declared in special way, i.e. as <code>i-bem__dom</code> module.</p>
+<p>Be careful declaring your modules.</p>
+<h3 id="testing">Testing<a hidden class="anchor" aria-hidden="true" href="#testing">#</a></h3>
+<p>When you work in a big company like <a href="http://yandex.com/">Yandex</a> your application is always intently checked by testing team.</p>
+<p>I am proud to say that we have an unbelievable testing team! Guys are really incredible! They can find bugs which can be reproduced in a very tricky way (sometimes I really hate them, lol). After careful check your application can be published in production without any doubts.</p>
+<p>However, this project is not a part of my job and I do not have great testers to verify my application. Therefore I undertook three steps to create a stable application.</p>
+<p>First step is a linting code with <code>jshint</code> and <code>jscs</code>. I have already told you about them in <strong>Tools</strong> part. After this step I got consistent code.</p>
+<p>Unit testing is the next step. In my opinion tests are an important part of your code. Using <code>phantomjs</code> to run tests in console or automatically after each commit, can speed up development and refactoring.</p>
+<p>Honestly, I usually write tests only after I have completed structure (backbone) of an application. I do not use TDD approach. Anyway without unit tests I have no guarantee that my application works properly :)</p>
+<p>I think it does not matter what kind of framework you choose for unit testing. For instance, I used <a href="http://visionmedia.github.io/mocha/">mocha</a> + <a href="http://chaijs.com/">chai</a> + <a href="http://sinonjs.org/">sinon</a> for BEM calendar. Unit testing cannot completely save the day, though. They do not test the application in different browsers.</p>
+<p>I have a macbook and can test my calendar only in couple browsers and on one platform. First idea was to download virtual machines from <a href="http://www.modern.ie/">modern.ie</a>. But I do not have much time to test the calendar in all virtual machines.</p>
+<p>So my choice is <a href="http://www.browserstack.com/">BrowserStack</a> with a wide range of browsers and platforms. Firstly, this service runs your site in various browsers (25 in free version) and <a href="http://www.browserstack.com/screenshots/18d918bb9bb188f9df08b436be34835ad01735f7">creates screnshot for each of them</a>. If you noticed an error on a screenshot you can run virtual machine in browser to explore its reason in detail.</p>
+<p>I hate doing extra actions for testing. So I created a special page <a href="http://tarmolov.github.io/bem-calendar/pages/calendar-test/calendar-test.html">calendar-test</a> where my testing script adds event and opens popups. Now I can <a href="http://www.browserstack.com/screenshots/0742d8374fe1836f15e8774719e465a2adade766">quickly verify work of my application</a>.</p>
+<p>Linting code, unit testing, and browserStack help you to make an application very stable. Use them wise.</p>
+<h3 id="continuous-integration-ci">Continuous integration (CI)<a hidden class="anchor" aria-hidden="true" href="#continuous-integration-ci">#</a></h3>
+<p><a href="http://en.wikipedia.org/wiki/Continuous_integration">CI</a> is a good way to be calm about your project. At work I usually use <a href="http://www.jetbrains.com/teamcity/">TeamCity</a> by JetBrains which is perfectly suitable for our work issues. Teamcity helps to automate everything in our development process and does it well. Unfortunately our teamcity server is not opened for everyone. Moreover Teamcity is not free and you should own a server for setting it up.</p>
+<p>To be honest I did not want to buy server for this project; so, I chose <a href="http://travis-ci.org/">Travis</a> which is perfectly suitable for projects hosted on github.</p>
+<p>Many developers have heard about CI because it is in a fashion but they never used it. Why? Is it so complex to set up? Or could only serious guys use it? It is a myth. Try Travis. Probably it is the easiest CI tool to set up.</p>
+<p>You have to do only three steps:</p>
+<ol>
+<li>Sign in <a href="http://travis-ci.org/">Travis CI</a> and activate GitHub service Hook for your project.</li>
+<li>Add .travis.yaml file to your repository.</li>
+<li><code>git push</code></li>
+</ol>
+<p>Travis CI config is rather simple. You need to specify only language and nodejs version.</p>
+<pre tabindex="0"><code>language: node_js
+node_js:
+- 0.8
+</code></pre><p>This configuration is sufficient for linting your code and running unit tests! Do not forget to add <code>scripts</code> section in your package.json.</p>
+<p>But I wanted more. My goal was to regenerate my demo after each successful build when all tests have been passed. I  googled a <a href="http://sleepycoders.blogspot.ru/2013/03/sharing-travis-ci-generated-files.html">blog post</a> with a solution.</p>
+<p>In a nutshell, you should teach Travis to authenticate to your repository with push permission.</p>
+<ol>
+<li><a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">Create a github access token</a>.</li>
+<li>Encrypt your token and put it into a travis config so no one can use your token and break into your repo.</li>
+</ol>
+<pre tabindex="0"><code>gem install travis
+travis encrypt -r &lt;user&gt;/&lt;repository&gt; GH_TOKEN=&lt;token&gt; --add env.global
+</code></pre><p>After that action travis can not only clone your project repository but also push some changes to it. So I wrote a script <a href="https://github.com/tarmolov/bem-calendar/blob/master/update-gh-pages.sh"><code>update-gh-pages.sh</code></a> and appended a new directive to travis config:</p>
+<pre tabindex="0"><code>after_success: ./update-gh-pages.sh
+</code></pre><p>Now travis regenerates my demo for each push. It works like a magic.</p>
+<h3 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h3>
+<p>BEM calendar is a very simple application but this article is not about creating calendars. My goal is to show you principles of good development:</p>
+<ul>
+<li>Develop the design of your application carefully and lay the groundwork for future possible features.</li>
+<li>Use tools which help you write more accurate and stable code.</li>
+<li>Test your code not only with unit tests but use crossbrowser tests, too.</li>
+<li>Automate everything you can.</li>
+</ul>
+<p>I hope this article provide will be useful for you further projects.</p>
+<p>And thanks to all those courageous who read this article down to the end :)</p>
+<h3 id="thanks">Thanks<a hidden class="anchor" aria-hidden="true" href="#thanks">#</a></h3>
+<p>I want to say a special thank to my girlfriend for invaluable support and making this post much better.</p>
+<p>Also I thank everyone who helped me to improve the post. Special thanks to <a href="https://github.com/ignovak">ignovak</a>, <a href="https://github.com/dfilatov">dfilatov</a>, and <a href="https://github.com/dodev">dodev</a>.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://tarmolov.ru/posts/how-i-use-evernote/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>How I use Evernote</span>
+  </a>
+  <a class="next" href="https://tarmolov.ru/posts/initial-commit/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Initial commit</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2026 <a href="https://tarmolov.ru/">Alexander Tarmolov</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
