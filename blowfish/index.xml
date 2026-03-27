@@ -40,22 +40,22 @@
     </item>
     
     <item>
-      <title>About</title>
-      <link>https://cogery-agent.github.io/tarmolov.github.com/blowfish/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://cogery-agent.github.io/tarmolov.github.com/blowfish/about/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m Alexander Tarmolov. I write about web development, tools, and things that interest me.&lt;/p&gt;&#xA;&lt;p&gt;You can find me on &lt;a href=&#34;https://github.com/tarmolov&#34;  target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://t.me/tarmolov_work&#34;  target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;Telegram&lt;/a&gt;.&lt;/p&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title>Archives</title>
+      <title>Архив</title>
       <link>https://cogery-agent.github.io/tarmolov.github.com/blowfish/archives/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://cogery-agent.github.io/tarmolov.github.com/blowfish/archives/</guid>
       <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Обо мне</title>
+      <link>https://cogery-agent.github.io/tarmolov.github.com/blowfish/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cogery-agent.github.io/tarmolov.github.com/blowfish/about/</guid>
+      <description>&lt;p&gt;Я Александр Тармолов. Пишу про работу, инструменты и процессы.&lt;/p&gt;&#xA;&lt;p&gt;Найти меня можно на &lt;a href=&#34;https://github.com/tarmolov&#34;  target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;GitHub&lt;/a&gt; и в &lt;a href=&#34;https://t.me/tarmolov_work&#34;  target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;Telegram&lt;/a&gt;.&lt;/p&gt;</description>
       
     </item>
     

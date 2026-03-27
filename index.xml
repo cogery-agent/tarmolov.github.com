@@ -35,12 +35,12 @@ I chose Jekyll as my blog engine because:
 simple design; flexibility; local server for debugging and preview; markdown; I will miss Jekyll a bit but the time has come to move on to Hugo.</description>
     </item>
     <item>
-      <title>About</title>
+      <title>Обо мне</title>
       <link>https://cogery-agent.github.io/tarmolov.github.com/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://cogery-agent.github.io/tarmolov.github.com/about/</guid>
-      <description>I&amp;rsquo;m Alexander Tarmolov. I write about web development, tools, and things that interest me.
-You can find me on GitHub and Telegram.</description>
+      <description>Я Александр Тармолов. Пишу про работу, инструменты и процессы.
+Найти меня можно на GitHub и в Telegram.</description>
     </item>
   </channel>
 </rss>
