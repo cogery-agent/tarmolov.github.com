@@ -16,7 +16,7 @@
       
       <guid>https://cogery-agent.github.io/tarmolov.github.com/blowfish/posts/how-i-use-evernote/</guid>
       <description>&lt;p&gt;&#xA;&#xA;  &#xA;&#xA;&lt;img loading=&#34;lazy&#34; src=&#34;https://cogery-agent.github.io/tarmolov.github.com/blowfish/i/evernote_my.png&#34; alt=&#34;My Evernote configuration&#34; /&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;This topic is about planning and collecting information. In my opinion, these processes are inevitable part of development.&lt;/p&gt;&#xA;&lt;p&gt;Obviously developers have to plan their activity and it doesn’t matter what kind of tools you use. It could be special applications, stickers, todo-lists or keeping all your plans in the head. To become more effective and professional developer we should study to plan and clear up what is important and what is not.&lt;/p&gt;</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cogery-agent.github.io/tarmolov.github.com/blowfish/posts/how-i-use-evernote/thumbnail.png" />
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       
       <guid>https://cogery-agent.github.io/tarmolov.github.com/blowfish/posts/bem-calendar/</guid>
       <description>&lt;p&gt;First of all, a little preface. A couple of weeks ago I got to know about Frontend Developer School run by &lt;a href=&#34;http://hh.ru/locale.do?language=EN&#34;  target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;HeadHunter&lt;/a&gt;. The entering assignment was to make a simple calendar. This issue seemed to be quite interesting for me and I decided to solve it using new &lt;a href=&#34;https://github.com/bem/bem-core/&#34;  target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;bem-core&lt;/a&gt; library.&lt;/p&gt;&#xA;&lt;p&gt;This article is divided into five parts:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Design&lt;/strong&gt; tells you how I designed my mini application.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Tools&lt;/strong&gt; teaches you which tools make are handy and make your development cozy.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Development&lt;/strong&gt; is dedicated to established solutions and problems.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt; shows you how I tested my project and made it stable.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Continuous integration&lt;/strong&gt; is the last one and it tells you about automatization.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Note.&lt;/strong&gt; It is a long article. If you do not want to read the whole post please go to project page on &lt;a href=&#34;https://github.com/tarmolov/bem-calendar#bem-calendar-&#34;  target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;github&lt;/a&gt; for short version :)&lt;/p&gt;</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cogery-agent.github.io/tarmolov.github.com/blowfish/posts/bem-calendar/thumbnail.png" />
     </item>
     
     <item>
