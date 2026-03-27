@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories on Alexander Tarmolov</title>
-    <link>https://tarmolov.ru/categories/</link>
+    <link>https://cogery-agent.github.io/tarmolov.github.com/categories/</link>
     <description>Recent content in Categories on Alexander Tarmolov</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 26 Feb 2014 16:03:35 +0000</lastBuildDate>
-    <atom:link href="https://tarmolov.ru/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://cogery-agent.github.io/tarmolov.github.com/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Blog</title>
-      <link>https://tarmolov.ru/categories/blog/</link>
+      <link>https://cogery-agent.github.io/tarmolov.github.com/categories/blog/</link>
       <pubDate>Wed, 26 Feb 2014 16:03:35 +0000</pubDate>
-      <guid>https://tarmolov.ru/categories/blog/</guid>
+      <guid>https://cogery-agent.github.io/tarmolov.github.com/categories/blog/</guid>
       <description></description>
     </item>
   </channel>

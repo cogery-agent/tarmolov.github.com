@@ -2,43 +2,43 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Alexander Tarmolov</title>
-    <link>https://tarmolov.ru/</link>
+    <link>https://cogery-agent.github.io/tarmolov.github.com/</link>
     <description>Recent content on Alexander Tarmolov</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 26 Feb 2014 16:03:35 +0000</lastBuildDate>
-    <atom:link href="https://tarmolov.ru/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://cogery-agent.github.io/tarmolov.github.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How I use Evernote</title>
-      <link>https://tarmolov.ru/posts/how-i-use-evernote/</link>
+      <link>https://cogery-agent.github.io/tarmolov.github.com/posts/how-i-use-evernote/</link>
       <pubDate>Wed, 26 Feb 2014 16:03:35 +0000</pubDate>
-      <guid>https://tarmolov.ru/posts/how-i-use-evernote/</guid>
+      <guid>https://cogery-agent.github.io/tarmolov.github.com/posts/how-i-use-evernote/</guid>
       <description>This topic is about planning and collecting information. In my opinion, these processes are inevitable part of development.
 Obviously developers have to plan their activity and it doesn’t matter what kind of tools you use. It could be special applications, stickers, todo-lists or keeping all your plans in the head. To become more effective and professional developer we should study to plan and clear up what is important and what is not.</description>
     </item>
     <item>
       <title>Simple BEM calendar</title>
-      <link>https://tarmolov.ru/posts/bem-calendar/</link>
+      <link>https://cogery-agent.github.io/tarmolov.github.com/posts/bem-calendar/</link>
       <pubDate>Sun, 22 Sep 2013 19:31:12 +0000</pubDate>
-      <guid>https://tarmolov.ru/posts/bem-calendar/</guid>
+      <guid>https://cogery-agent.github.io/tarmolov.github.com/posts/bem-calendar/</guid>
       <description>First of all, a little preface. A couple of weeks ago I got to know about Frontend Developer School run by HeadHunter. The entering assignment was to make a simple calendar. This issue seemed to be quite interesting for me and I decided to solve it using new bem-core library.
 This article is divided into five parts:
 Design tells you how I designed my mini application. Tools teaches you which tools make are handy and make your development cozy.</description>
     </item>
     <item>
       <title>Initial commit</title>
-      <link>https://tarmolov.ru/posts/initial-commit/</link>
+      <link>https://cogery-agent.github.io/tarmolov.github.com/posts/initial-commit/</link>
       <pubDate>Wed, 14 Aug 2013 23:27:07 +0000</pubDate>
-      <guid>https://tarmolov.ru/posts/initial-commit/</guid>
+      <guid>https://cogery-agent.github.io/tarmolov.github.com/posts/initial-commit/</guid>
       <description>At long last I have started my blog. I am going to describe here my thoughts and ideas which relate with a web development. I will also plan to share my experience (successful and failed), my projects, and experiments.
 I chose Jekyll as my blog engine because:
 simple design; flexibility; local server for debugging and preview; markdown; I will miss Jekyll a bit but the time has come to move on to Hugo.</description>
     </item>
     <item>
       <title>About</title>
-      <link>https://tarmolov.ru/about/</link>
+      <link>https://cogery-agent.github.io/tarmolov.github.com/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://tarmolov.ru/about/</guid>
+      <guid>https://cogery-agent.github.io/tarmolov.github.com/about/</guid>
       <description>I&amp;rsquo;m Alexander Tarmolov. I write about web development, tools, and things that interest me.
 You can find me on GitHub and Telegram.</description>
     </item>
