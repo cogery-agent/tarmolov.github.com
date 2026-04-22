@@ -1,0 +1,5 @@
+{{ $icon := .Get "icon" | default "" }}
+<div class="alert-shortcode" style="margin:1.25rem 0;padding:1rem 1.25rem;border-left:4px solid #229ED9;background:#f5fbff;border-radius:8px;">
+  {{ with $icon }}<div style="font-weight:600;margin-bottom:.35rem;opacity:.8;">{{ . }}</div>{{ end }}
+  <div>{{ .Inner | markdownify }}</div>
+</div>
